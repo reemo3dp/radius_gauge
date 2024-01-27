@@ -1,3 +1,4 @@
+use <overpass-extrabold.ttf>;
 
 module gauge_concave(radius) {
     difference() {
@@ -23,7 +24,7 @@ module gauge_convex(radius) {
 
 
 module radius_text(radius) {
-    text(padded_str(radius), size = 6, font = "Cantarell:style=Extra Bold", halign = "right", $fn = 1000);
+    text(padded_str(radius), size = 6, font = "Overpass:style=ExtraBold", halign = "right", $fn = 1000);
 }
 
 module base() {
