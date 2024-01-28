@@ -1,4 +1,5 @@
 use <overpass-extrabold.ttf>;
+use <chamfers.scad>;
 
 NUM = 30;
 
@@ -7,8 +8,6 @@ SLOT_DEPTH=35.55;
 SLOT_WIDTH=2.35;
 SLOT_HEIGHT=8;
 SLOT_WALL=0.85;
-
-FUDGE=0.0001;
 
 SLOTS_WIDTH = NUM*SLOT_WIDTH + (NUM-1)*SLOT_WALL;
 BASE_WIDTH=SLOTS_WIDTH+4.92501*2;
@@ -49,29 +48,6 @@ module slot() {
             translate([0, SLOT_DEPTH+2.125, -sqrt(2)/2]) rotate([45, 0, 0]) cube([SLOT_WIDTH, 1, 1]);
         }
     }
-}
-
-
-
-
-module 3d_chamfer(bottomW, bottomD, bottomSideChamfer, topW, topD, topSideChamfer, height) {
-    hull() {
-        linear_extrude(height = FUDGE) 2d_chamfer(bottomW, bottomD, sqrt(pow(bottomSideChamfer, 2)/2));
-        translate([(topW/bottomW)/2, (topD/bottomD)/2, height-FUDGE]) linear_extrude(height = FUDGE) 2d_chamfer(topW, topD, sqrt(pow(topSideChamfer, 2)/2));
-    }
-}
-
-module 2d_chamfer(bottomW, bottomD, radius) {
-    polygon([
-            [radius, 0], 
-            [0, radius], 
-            [0, bottomD-radius], 
-            [radius, bottomD],
-            [bottomW-radius, bottomD],
-            [bottomW, bottomD-radius],
-            [bottomW, radius],
-            [bottomW-radius, 0]
-        ]);
 }
 
 
