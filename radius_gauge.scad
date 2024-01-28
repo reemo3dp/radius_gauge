@@ -6,6 +6,7 @@ TYPE="concave"; // Overwrite with -D TYPE=convex
 FLIP=false;
 BASE_WIDTH=34.9;
 CHAMFER_WIDTH=2;
+ROTATE_TEXT=true;
 
 if(TYPE == "concave") {
     rotate([0,FLIP ? 180 : 0,0]) gauge_concave(BASE_WIDTH, RADIUS, CHAMFER_WIDTH, TAB);
@@ -21,7 +22,11 @@ module gauge_concave(baseWidth, radius, chamferWidth, tab) {
     difference() {
         base(baseWidth, chamferWidth, tab);
         translate([0, baseWidth, 1]) cylinder(h = 2, r = radius, center = true, $fn = 1000);
-        translate([baseWidth-2, 4, 1.7]) linear_extrude(0.3) radius_text(baseWidth, radius);
+        if(ROTATE_TEXT) {
+            translate([baseWidth-2, 4, 1.7]) linear_extrude(0.3) rotate([0, 0, 90]) radius_text(baseWidth, radius, halign="left");
+        } else {
+            translate([baseWidth-2, 4, 1.7]) linear_extrude(0.3) radius_text(baseWidth, radius);
+        }
     };
 };
 
@@ -40,8 +45,8 @@ module gauge_convex(baseWidth, radius, chamferWidth, tab) {
 };
 
 
-module radius_text(baseWidth, radius) {
-    text(padded_str(radius), size = 6, font = "Overpass:style=ExtraBold", halign = "right", $fn = 1000);
+module radius_text(baseWidth, radius, halign = "right") {
+    text(padded_str(radius), size = 6, font = "Overpass:style=ExtraBold", halign = halign, $fn = 1000);
 }
 
 module base(baseWidth, chamferWidth, withTab) {
@@ -77,6 +82,10 @@ function leftpad(num, digits) = num >= pow(10, digits-1) ? str(num) : str("0", l
 
 
 module module_text(baseWidth, r) {
-    color("red") translate([baseWidth-2, 4, 1.701]) linear_extrude(0.3) radius_text(baseWidth, r);
+    if(ROTATE_TEXT) {
+        color("red") translate([baseWidth-2, 4, 1.701]) rotate([0, 0, 90]) linear_extrude(0.3) radius_text(baseWidth, r, halign="left");
+    } else {
+        color("red") translate([baseWidth-2, 4, 1.701]) linear_extrude(0.3) radius_text(baseWidth, r);
+    }
 }
 
