@@ -1,6 +1,6 @@
 use <overpass-extrabold.ttf>;
 
-RADIUS=5; // Overwrite with -D RADIUS=$X
+RADIUS=30; // Overwrite with -D RADIUS=$X
 TAB=true; // Overwrite with -D TAB=true
 TYPE="concave"; // Overwrite with -D TYPE=convex
 FLIP=false;

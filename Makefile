@@ -37,7 +37,7 @@ stls/remix_concave_R%.3mf: radius_gauge.scad
 	@mkdir ./stls/ 2>/dev/null || true
 	$(OPENSCAD) -o $@ --enable lazy-union \
 		-D 'FLIP=true' \
-		-D 'TYPE="convex"' \
+		-D 'TYPE="concave"' \
 		-D 'TAB=true' \
 		-D 'BASE_WIDTH=34.9' \
 		-D 'CHAMFER_WIDTH=2' \
