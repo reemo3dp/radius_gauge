@@ -2,7 +2,7 @@ use <overpass-extrabold.ttf>;
 
 RADIUS=30; // Overwrite with -D RADIUS=$X
 TAB=true; // Overwrite with -D TAB=true
-TYPE="concave"; // Overwrite with -D TYPE=convex
+TYPE="convex"; // Overwrite with -D TYPE=convex
 FLIP=false;
 BASE_WIDTH=34.9;
 CHAMFER_WIDTH=2;
@@ -40,7 +40,11 @@ module gauge_convex(baseWidth, radius, chamferWidth, tab) {
                 cylinder(h = 2, r = RADIUS, $fn = 1000);
             };
         };
-        translate([baseWidth-2, 4, 1.7]) linear_extrude(0.3) radius_text(baseWidth, radius);
+        if(ROTATE_TEXT) {
+            translate([baseWidth-2, 4, 1.7]) linear_extrude(0.3) rotate([0, 0, 90]) radius_text(baseWidth, radius, halign="left");
+        } else {
+            translate([baseWidth-2, 4, 1.7]) linear_extrude(0.3) radius_text(baseWidth, radius);
+        }
     };
 };
 
