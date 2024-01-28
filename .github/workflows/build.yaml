@@ -24,4 +24,4 @@ jobs:
           git config --global user.email "githubactions@github.com"
           git add -f stls/
           git commit -m "Render 3mfs"
-          git push origin HEAD:${$GITHUB_REF}
+          git push origin HEAD:${GITHUB_REF}
