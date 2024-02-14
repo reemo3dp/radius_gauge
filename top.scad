@@ -18,7 +18,7 @@ BASE_DEPTH=SLOTS_DEPTH+4.72500*2;
 difference() {
     union() {
       hull() {
-        translate([2, 2, 0]) cube([BASE_WIDTH-4, BASE_DEPTH-2, FUDGE]);
+        translate([2, 2, 0]) cube([BASE_WIDTH-4, BASE_DEPTH-4, FUDGE]);
         translate([0, 0, 2-FUDGE]) linear_extrude(height = FUDGE) 2d_chamfer(BASE_WIDTH, BASE_DEPTH, 2);
       };
       translate([0, 0, 2]) linear_extrude(height = 34) 2d_chamfer(BASE_WIDTH, BASE_DEPTH, 2);
