@@ -7,6 +7,7 @@ FLIP=false;
 BASE_WIDTH=34.9;
 CHAMFER_WIDTH=2;
 ROTATE_TEXT=true;
+INCLUDE_TEXT=true;
 
 if(TYPE == "concave") {
     rotate([0,FLIP ? 180 : 0,0]) gauge_concave(BASE_WIDTH, RADIUS, CHAMFER_WIDTH, TAB);
@@ -14,7 +15,9 @@ if(TYPE == "concave") {
     rotate([0,FLIP ? 180 : 0,0]) gauge_convex(BASE_WIDTH, RADIUS, CHAMFER_WIDTH, TAB);
 }
 
-rotate([0,FLIP ? 180 : 0,0]) module_text(BASE_WIDTH, RADIUS);
+if(INCLUDE_TEXT) {
+    rotate([0,FLIP ? 180 : 0,0]) module_text(BASE_WIDTH, RADIUS);
+}
 
 
 

@@ -4,6 +4,8 @@ include <chamfers.scad>;
 NUM = 30;
 TYPE = "concave";
 
+INCLUDE_TEXT=true;
+
 BASE_WALL_THICKNESS=2.4;
 SLOT_DEPTH=35.55;
 SLOT_WIDTH=2.35;
@@ -14,6 +16,7 @@ SLOTS_WIDTH = NUM*SLOT_WIDTH + (NUM-1)*SLOT_WALL;
 BASE_WIDTH=SLOTS_WIDTH+4.92501*2;
 SLOTS_DEPTH = SLOT_DEPTH;
 BASE_DEPTH=SLOTS_DEPTH+4.72500*2;
+
 
 difference() {
     union() {
@@ -28,7 +31,9 @@ difference() {
     translate([BASE_WIDTH/2, BASE_DEPTH/2, 0]) mod_text();
 }
 
-translate([BASE_WIDTH/2, BASE_DEPTH/2, -FUDGE]) mod_text();
+if(INCLUDE_TEXT) {
+  translate([BASE_WIDTH/2, BASE_DEPTH/2, -FUDGE]) mod_text();
+}
 
 module mod_text() {
     translate([0, 0, 0.3]) rotate([180, 0, 0]) linear_extrude(height = 0.3) {
