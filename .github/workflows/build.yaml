@@ -25,4 +25,4 @@ jobs:
           name: ${{ steps.trunkver.outputs.trunkver }}
           tag_name: ${{ steps.trunkver.outputs.trunkver }}
           files: |
-            stls/*.stl
+            stls/*
