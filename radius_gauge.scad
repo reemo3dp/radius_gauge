@@ -8,6 +8,7 @@ BASE_WIDTH=34.9;
 CHAMFER_WIDTH=2;
 ROTATE_TEXT=true;
 INCLUDE_TEXT=true;
+TEXT_DEPTH=INCLUDE_TEXT ? 0.3 : 0.4;
 
 if(TYPE == "concave") {
     rotate([0,FLIP ? 180 : 0,0]) gauge_concave(BASE_WIDTH, RADIUS, CHAMFER_WIDTH, TAB);
@@ -26,9 +27,9 @@ module gauge_concave(baseWidth, radius, chamferWidth, tab) {
         base(baseWidth, chamferWidth, tab);
         translate([0, baseWidth, 1]) cylinder(h = 2, r = radius, center = true, $fn = 1000);
         if(ROTATE_TEXT) {
-            translate([baseWidth-2, 4, 1.7]) linear_extrude(0.3) rotate([0, 0, 90]) radius_text(baseWidth, radius, halign="left");
+            translate([baseWidth-2, 4, 2-TEXT_DEPTH]) linear_extrude(TEXT_DEPTH) rotate([0, 0, 90]) radius_text(baseWidth, radius, halign="left");
         } else {
-            translate([baseWidth-2, 4, 1.7]) linear_extrude(0.3) radius_text(baseWidth, radius);
+            translate([baseWidth-2, 4, 2-TEXT_DEPTH]) linear_extrude(TEXT_DEPTH) radius_text(baseWidth, radius);
         }
     };
 };
@@ -44,9 +45,9 @@ module gauge_convex(baseWidth, radius, chamferWidth, tab) {
             };
         };
         if(ROTATE_TEXT) {
-            translate([baseWidth-2, 4, 1.7]) linear_extrude(0.3) rotate([0, 0, 90]) radius_text(baseWidth, radius, halign="left");
+            translate([baseWidth-2, 4, 2-TEXT_DEPTH]) linear_extrude(TEXT_DEPTH) rotate([0, 0, 90]) radius_text(baseWidth, radius, halign="left");
         } else {
-            translate([baseWidth-2, 4, 1.7]) linear_extrude(0.3) radius_text(baseWidth, radius);
+            translate([baseWidth-2, 4, 2-TEXT_DEPTH]) linear_extrude(TEXT_DEPTH) radius_text(baseWidth, radius);
         }
     };
 };
@@ -90,9 +91,9 @@ function leftpad(num, digits) = num >= pow(10, digits-1) ? str(num) : str("0", l
 
 module module_text(baseWidth, r) {
     if(ROTATE_TEXT) {
-        color("red") translate([baseWidth-2, 4, 1.701]) rotate([0, 0, 90]) linear_extrude(0.3) radius_text(baseWidth, r, halign="left");
+        color("red") translate([baseWidth-2, 4, 2.001-TEXT_DEPTH]) rotate([0, 0, 90]) linear_extrude(TEXT_DEPTH) radius_text(baseWidth, r, halign="left");
     } else {
-        color("red") translate([baseWidth-2, 4, 1.701]) linear_extrude(0.3) radius_text(baseWidth, r);
+        color("red") translate([baseWidth-2, 4, 2.001-TEXT_DEPTH]) linear_extrude(TEXT_DEPTH) radius_text(baseWidth, r);
     }
 }
 
