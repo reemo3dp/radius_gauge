@@ -12,7 +12,7 @@ jobs:
       - name: Generate trunkver
         id: trunkver
         uses: crftd-tech/trunkver@main
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Render in OpenSCAD
         run: |
           set -euxo pipefail
